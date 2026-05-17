@@ -1,0 +1,319 @@
+"<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幻幻团队小号机V4</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{padding:30px 20px;background:#f5f5f5;}
+
+        /* 带方框的公告栏 */
+        .notice-box{
+            border: 3px solid #0066ff;
+            background: #ffffff;
+            color: #0066ff;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .title{
+            color: #0066ff;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-box{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        button{
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #0066ff;
+            color: #fff;
+        }
+        #resText{
+            margin-top: 30px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            min-height: 60px;
+            word-break: break-all;
+        }
+        .tip{
+            text-align:center;
+            color:green;
+            margin-top:10px;
+            display:none;
+        }
+        .footer-text{
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #666;
+        }
+        #copyBtn{
+            background: #28a745;
+            margin-top: 15px;
+        }
+        .nb-btn{
+            background: #ff3366 !important;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 方框公告栏 -->
+<div class="notice-box">小号机V4为付费版要卡密+QQ3948742257,Cookie到时候会补多</div>
+
+<div class="title">幻幻小号机，网易注册邮箱号</div>
+<div class="btn-box">
+    <button id="mailBtn">邮箱生成</button>
+    <button class="nb-btn" id="huanNbBtn">身份证生成</button>
+    <button id="gameBtn">4399账号生成</button>
+    <button id="cookieBtn">Cookie号生成</button>
+    <button id="copyBtn">复制结果</button>
+</div>
+<div id="resText">生成结果在这里</div>
+<div class="tip" id="tip">复制成功！</div>
+<div class="footer-text">幻幻牛逼 QQ群：1017842928</div>
+
+<script>
+    let mailList = [
+        "frrhvqij95927@126.com----r751550",
+        "vyv32901621@126.com----kj40217",
+        "huanxie78091dao@126.com----gia58033755",
+        "nxlashqjyf@126.com----81uhl8bwzk",
+        "haocou914caidang@126.com----zp477601",
+        "xm91103545572@126.com----wq44529",
+        "ignwg4246@126.com----ynt5903422368",
+        "jia2228dulupan3@126.com----wr319808",
+        "ygtegjsx23969@126.com----hg0589189",
+        "ffbn15029818@126.com----sf98140",
+        "j388916iqkmm19206@126.com----vxa3520",
+        "drthxv713@126.com----pn5146015",
+        "bqaeowxxeyucxakcx@126.com----qzwvciub5e",
+        "juzwbvga54917@126.com----vq3214291",
+        "cedjbigb14570@126.com----sz68945025",
+        "uuymoxnq16419@126.com----zf37493925",
+        "lanou3613guans@126.com----pm77719",
+        "vpkeuyag62654@126.com----hk2086760",
+        "bhznexezalrezbgq@126.com----a9xyhcgnqyqe",
+        "lxen57662968@126.com----vm074666",
+        "fkcttjokrn0109985@126.com----hk606805068471",
+        "gtzcko70691729@126.com----rd496553",
+        "ren7129079pihaiyo@126.com----gz1380",
+        "guwhoj53605171@126.com----twx872261774",
+        "wyedba82976277@126.com----zwu42945",
+        "hidc004orm71@126.com----11dzstlk",
+        "xb8717126742@126.com----feayv4838",
+        "zhan19298yun@126.com----zgv96142494",
+        "ikustxhf01@126.com----ejo262088",
+        "gbkt90872@126.com----ze47901",
+        "jbetjncu25322@126.com----dp7178353",
+        "yywx8342gai52@126.com----lun927ta121",
+        "jlcohiyzgohuncnh@126.com----ogfbpfkax3mqw4",
+        "fkt21164023@126.com----hro774219",
+        "applebaumfty@126.com----78592448",
+        "iigwjr75644@126.com----t55871618",
+        "ayj5674015@126.com----pic8817",
+        "kexi286pang@126.com----sik5808775",
+        "ren77082shao@126.com----t9779496",
+        "jyehnt2056@126.com----uq004915",
+        "jing64470he@126.com----lwx33421969",
+        "zaxlytyhnr4724717@126.com----yzs92601684179",
+        "anadfj65791522@126.com----up9408403193907",
+        "ovgyxyxkr@126.com----vwl6r43moiopyg",
+        "feng799001@126.com----et67961",
+        "taomei392mao@126.com----qi4816725",
+        "pewatx46801321@126.com----el8641756",
+        "jqxyci8342@126.com----uro61651337",
+        "budong18422kangc@126.com----t95478343",
+        "kan24547taokezh@126.com----np043238",
+        "juhe09244jie@126.com----pd2505",
+        "zhuangyi880mudi@126.com----v156775",
+        "vt59336967@126.com----bdy120718",
+        "wbsvbd91162@126.com----ht9139916",
+        "rntanxyreg07@126.com----zhang85815",
+        "fkuakwyvnyj@126.com----fekyx8hxf5ovkb",
+        "mbyxvfv2542@126.com----yfe035580",
+        "ukbjdw877ae4@126.com----hnsil93nlef",
+        "xian544zhao@126.com----bo42059486",
+        "fqy7385583@126.com----yli5320",
+        "ctqqoqracv05@126.com----hui825375",
+        "gang81986jiu@126.com----io7141313",
+        "thatcher3472@126.com----26129567",
+        "bfuwuz939@126.com----nb739075",
+        "ejrjowd34775@126.com----pc3290287",
+        "gong796387@126.com----vz69177",
+        "qvcovt37288@126.com----b17413435",
+        "ssmzvlxxu4@126.com----shi731369",
+        "bpubhb79965020@126.com----jqy30751",
+        "jzqkb263ujh17@126.com----rd5zj77",
+        "gai350582zhuipa@126.com----aot845836",
+        "dqegzq0366x7@126.com----9205kkxpl",
+        "heji245gudong@126.com----pq42817773",
+        "gong833622@126.com----xq66447",
+        "hxvcudht19933@126.com----rm15402130",
+        "rty46500914@126.com----kq067411",
+        "xujuatf26@126.com----i0638830",
+        "omuziqig134@126.com----nx38744973",
+        "zhao732mujia@126.com----ix299088",
+        "tacbsfre83380@126.com----wi239151912469",
+    ];
+    let nbList = [
+        "李金栓----110101195403123524",
+        "赵青----130105197312222410",
+        "吴荣德----341022198309280711",
+        "孟强----120101197805034533",
+        "杨洪昌----513524197508136455",
+        "万物新----510202198102182918",
+        "赵鹏举----411024198309066230",
+        "王冰----22010219760817027X",
+        "王辉----232321196405081559",
+        "杨威----210103195312181266",
+        "周保平----150205197202210610",
+        "左小强----432501198110061018",
+        "陈卫良----330682198012182834",
+        "孙仁标----332602198001144058",
+        "谢文琪----510202198311186536",
+        "张曦----331002198303130037",
+        "陶雷----321323198410121538",
+        "王玉安----341226198311033214",
+        "李建明----321011197702281270",
+        "曹美红----320682198704256804",
+        "朱玉权----320911197002276057",
+        "张军喜----372930198206271172",
+        "于丽娜----210282198801223820",
+        "陆张倍----320681198902070211",
+        "孔凡勇----321123197808101654",
+        "吴小建----320623197804143175",
+        "张继伟----370829198307024936",
+        "柳昔沅----332502198706046233",
+        "陈石兵----320682199202094336",
+        "尤莉娟----120682199206284348",
+        "陈伟----320602198701286213",
+        "徐佳----62060219861112304X",
+        "朱斌----120602196810032010",
+        "陈丹丹----320681198912166444",
+        "韩滨----370303197801223118",
+        "宋宁----370724197504031228",
+        "李洪喜----370502196411270410",
+        "王建光----370502196505050427",
+        "张书运----370830196208262919",
+        "唐锐----370602197908115517",
+        "张生辉----370502197103161639",
+        "杨喜端----370631195606025012",
+        "朱鲁霞----370704198109280223",
+        "王子兴----370682197511200079",
+        "夏焱----320106196301083256",
+        "赵卫东----510222197112297218",
+        "方世平----330126197402280912",
+        "邱媛----370982198802054128",
+        "于建亭----370628197810192513",
+        "许俊杰----320105198102251475",
+        "刘俊玉----350102196910010634",
+        "徐东莹----320584199009203526",
+        "栗鹏----620102197604140019",
+        "贺志军----321088197403224851",
+        "吕杰----37280119511027161X",
+        "田桂芳----410403195104191025",
+        "李靖----110105198808242117",
+        "王东静----110226198611281427",
+        "张科越----410204195603155032",
+        "栗建涛----410185198109235017",
+        "曾亮----410105196507231096",
+        "陆雷----310224197303066311",
+        "邬美华----532331195809280027",
+        "杨华----532331197301300014",
+        "杨成祥----510102196008016599",
+        "魏筱艳----936010199701113820",
+        "金巨江----210727198104040677",
+        "黄爱武----420603197006170513",
+        "张国霞----420303197702182546",
+        "王震宇----420300196211180112",
+        "龚勇----420300196902120338",
+        "袁芳----331163193403022521",
+        "李丹----42030019711005092X",
+        "张驰----420116199102096249",
+        "王江----132801196903242819",
+        "张国平----420300197410102517",
+        "王兵----429001198010060437",
+        "吕明----220103196305080631",
+        "孙立志----370727197109026532",
+        "张鹏----370783198605252710",
+        "郝元元----370304198901010022",
+        "吴志喜----372901198202014839",
+        "张玲----37233019800510376X",
+        "刘润华----440304201206116354",
+        "涂芷----412326199005116344",
+        "涂继超----412326199201296354",
+        "葛亚南----411424199008198826"
+        ];
+     let cookieList = [
+         `{"sauth_json":"{\"gameid\":\"x19\",\"login_channel\":\"netease\",\"app_channel\":\"netease\",\"platform\":\"pc\",\"sdkuid\":\"aibgqzcdv2h2rkav\",\"sessionid\":\"1-eyJzIjogInRyeTlocDRpeWdxZ3lud2Z0bWJrbmZocW1hNzdyajY4IiwgIm9kaSI6ICJhbWF3cXphYWF3b3JtbGhuLWQiLCAic2kiOiAiYTU1YTQ3MDdjNzM4NWQ0YTVlNGZhODNlM2U4NmExNmI2MzJmMGExZSIsICJ1IjogImFpYmdxemNkdjJoMnJrYXYiLCAidCI6IDIsICJnX2kiOiAiYWVjZnJ4b2R5cWFhYWFqcCJ9\",\"sdk_version\":\"3.9.0\",\"udid\":\"q3ldm4hlabhlyq7k8vmporp3zr452htu\",\"deviceid\":\"amawqzaaawormlhn-d\",\"aim_info\":\"{\\\"aim\\\":\\\"100.100.100.100\\\",\\\"country\\\":\\\"CN\\\",\\\"tz\\\":\\\"+0800\\\",\\\"tzid\\\":\\\"\\\"}\",\"client_login_sn\":\"3309CC9C0E5B11FC15FD933EBACFA928\",\"gas_token\":\"\",\"source_platform\":\"pc\",\"ip\":\"127.0.0.1\"}"}`,
+         `{"sauth_json":"{\"gameid\":\"x19\",\"login_channel\":\"netease\",\"app_channel\":\"netease\",\"platform\":\"pc\",\"sdkuid\":\"aibgqzcd42h2rklh\",\"sessionid\":\"1-eyJzIjogIjdobGxiY25oaTV5ajloaWJ3Ym52eXprcGlvcHViZWhmIiwgIm9kaSI6ICJhbWF3cXphYWF3b3JtbXBtLWQiLCAic2kiOiAiYzNkODg4YzNiZWFhMmM0NDZhOWM4OGQ3YzBjOWI1ZDQ3ZTExMDVkNiIsICJ1IjogImFpYmdxemNkNDJoMnJrbGgiLCAidCI6IDIsICJnX2kiOiAiYWVjZnJ4b2R5cWFhYWFqcCJ9\",\"sdk_version\":\"3.9.0\",\"udid\":\"if6ocb7xsn0vdo57eb65xngyoo1owa9l\",\"deviceid\":\"amawqzaaawormmpm-d\",\"aim_info\":\"{\\\"aim\\\":\\\"100.100.100.100\\\",\\\"country\\\":\\\"CN\\\",\\\"tz\\\":\\\"+0800\\\",\\\"tzid\\\":\\\"\\\"}\",\"client_login_sn\":\"A0C4BAA6250FF69A96E03CD0B5299374\",\"gas_token\":\"\",\"source_platform\":\"pc\",\"ip\":\"127.0.0.1\"}"}`,
+         `{"sauth_json":"{\"gameid\":\"x19\",\"login_channel\":\"netease\",\"app_channel\":\"netease\",\"platform\":\"pc\",\"sdkuid\":\"aibgqzcd4wh2rklb\",\"sessionid\":\"1-eyJzIjogImM3YXB3M2JudDA4cnp3d3I2Y3VpMzIxbnp0MDJ1dm53IiwgIm9kaSI6ICJhbWF3cXphYWF3b3JtbW95LWQiLCAic2kiOiAiNTA0ZWEwMjRiNTZlN2EyNDY3OTRkMWVmZTA1MDVkYTk2M2JlMzBkMCIsICJ1IjogImFpYmdxemNkNHdoMnJrbGIiLCAidCI6IDIsICJnX2kiOiAiYWVjZnJ4b2R5cWFhYWFqcCJ9\",\"sdk_version\":\"3.9.0\",\"udid\":\"6zgnq3p4lqq4dbw0mwfohku04jkep8yj\",\"deviceid\":\"amawqzaaawormmoy-d\",\"aim_info\":\"{\\\"aim\\\":\\\"100.100.100.100\\\",\\\"country\\\":\\\"CN\\\",\\\"tz\\\":\\\"+0800\\\",\\\"tzid\\\":\\\"\\\"}\",\"client_login_sn\":\"F48903E7DFEF8AD7B03364B6D25AD3FC\",\"gas_token\":\"\",\"source_platform\":\"pc\",\"ip\":\"127.0.0.1\"}"}`,
+         `{"sauth_json":"{\"gameid\":\"x19\",\"login_channel\":\"netease\",\"app_channel\":\"netease\",\"platform\":\"pc\",\"sdkuid\":\"aibgqzcdyoh2rkff\",\"sessionid\":\"1-eyJzIjogInRzcGdjaDZ3aTI1bnp3cnBpZDg1NnpndHlwaDQ3cDl5MWd6IiwgIm9kaSI6ICJhbWF3cXphYWF3b3JtbHdwLWQiLCAic2kiOiAiMDE0NWM2OTY5MTkzNmVjNmM4YjM3ZTYxMTUwODA2ZDhkNmYyY2JiNyIsICJ1IjogImFpYmdxemNkeW9oMnJrZmYiLCAidCI6IDIsICJnX2kiOiAiYWVjZnJ4b2R5cWFhYWFqcCJ9\",\"sdk_version\":\"3.9.0\",\"udid\":\"qiu8zx8k29xa7cli3lvfls5fi6ppg42p\",\"deviceid\":\"amawqzaaawormlwp-d\",\"aim_info\":\"{\\\"aim\\\":\\\"100.100.100.100\\\",\\\"country\\\":\\\"CN\\\",\\\"tz\\\":\\\"+0800\\\",\\\"tzid\\\":\\\"\\\"}\",\"client_login_sn\":\"B637C46F8E5C00EF031348AEB7BA7A6E\",\"gas_token\":\"\",\"source_platform\":\"pc\",\"ip\":\"127.0.0.1\"}"}`,
+         `{"sauth_json":"{\"gameid\":\"x19\",\"login_channel\":\"netease\",\"app_channel\":\"netease\",\"platform\":\"pc\",\"sdkuid\":\"aibgqzcdzsh2rkgx\",\"sessionid\":\"1-eyJzIjogImNqNW4zdmdkbXlpbGM1dmw1OXkyNG9rbjV1NHk0MmJ1IiwgIm9kaSI6ICJhbWF3cXphYWF3b3JtbDVmLWQiLCAic2kiOiAiYzVlZjk2NzUwMDgwN2E5MjA2OWQyZmMwNzJhYWE5NWQ1YTY4MTIyOCIsICJ1IjogImFpYmdxemNkenNoMnJrZ3giLCAidCI6IDIsICJnX2kiOiAiYWVjZnJ4b2R5cWFhYWFqcCJ9\",\"sdk_version\":\"3.9.0\",\"udid\":\"ipnnmg75ajvnnee9didn3p0izqgbp6q7\",\"deviceid\":\"amawqzaaaworml5f-d\",\"aim_info\":\"{\\\"aim\\\":\\\"100.100.100.100\\\",\\\"country\\\":\\\"CN\\\",\\\"tz\\\":\\\"+0800\\\",\\\"tzid\\\":\\\"\\\"}\",\"client_login_sn\":\"2246BE88FA91C033A647D0AA4F4C105F\",\"gas_token\":\"\",\"source_platform\":\"pc\",\"ip\":\"127.0.0.1\"}"}`
+     ];
+     let nowText = "";
+     function getRand9(){
+         let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+         let str = '';
+         for(let i=0;i<9;i++){
+             str += chars.charAt(Math.floor(Math.random() * chars.length));
+         }return str;
+     }
+     function copyText(txt){
+         if(!txt || txt === "生成内容"){
+             alert("空白内容");
+             return;
+         }
+         let input = document.createElement('input');
+         input.value = txt;
+         document.body.appendChild(input);
+         input.select();
+         document.execCommand('copy');
+         document.body.removeChild(input);
+         let tip = document.getElementById('tip');
+         tip.style.display = 'block';
+         setTimeout(()=>{tip.style.display='none'},1500);
+     }
+     document.getElementById('mailBtn').onclick = function(){
+         let ran = Math.floor(Math.random() * mailList.length);
+         nowText = mailList[ran];
+         document.getElementById('resText').innerText = nowText;
+     }
+     document.getElementById('gameBtn').onclick = function(){
+         let acc = getRand9();
+         let pwd = getRand9();
+         nowText = "账号："+acc+"   密码："+pwd;
+         document.getElementById('resText').innerText = nowText;
+     }
+     document.getElementById('cookieBtn').onclick = function(){
+         let ran = Math.floor(Math.random() * cookieList.length);
+         nowText = cookieList[ran];
+         document.getElementById('resText').innerText = nowText;
+     }
+     document.getElementById('huanNbBtn').onclick = function(){
+         let ran = Math.floor(Math.random() * nbList.length);
+         nowText = nbList[ran];
+         document.getElementById('resText').innerText = nowText;
+     }
+     document.getElementById('copyBtn').onclick = function(){
+         copyText(nowText);
+     }
+ </script>
+ </body>
+ </html>
